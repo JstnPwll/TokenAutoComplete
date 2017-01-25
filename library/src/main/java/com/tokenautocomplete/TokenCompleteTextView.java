@@ -298,21 +298,6 @@ public abstract class TokenCompleteTextView<T> extends MultiAutoCompleteTextView
         updateHint();
     }
 
-    /**
-     * <p>You can get a color integer either using
-     * {@link android.support.v4.content.ContextCompat#getColor(android.content.Context, int)}
-     * or with {@link android.graphics.Color#parseColor(String)}.</p>
-     * <p>{@link android.graphics.Color#parseColor(String)}
-     * accepts these formats (copied from android.graphics.Color):
-     * You can use: '#RRGGBB',  '#AARRGGBB'
-     * or one of the following names: 'red', 'blue', 'green', 'black', 'white',
-     * 'gray', 'cyan', 'magenta', 'yellow', 'lightgray', 'darkgray', 'grey',
-     * 'lightgrey', 'darkgrey', 'aqua', 'fuchsia', 'lime', 'maroon', 'navy',
-     * 'olive', 'purple', 'silver', 'teal'.</p>
-     *
-     * @param prefix prefix
-     * @param color A single color value in the form 0xAARRGGBB.
-     */
     public void setPrefix(CharSequence prefix, int color) {
         SpannableString spannablePrefix = new SpannableString(prefix);
         spannablePrefix.setSpan(new ForegroundColorSpan(color), 0, spannablePrefix.length(), 0);
@@ -899,7 +884,7 @@ public abstract class TokenCompleteTextView<T> extends MultiAutoCompleteTextView
         }
     }
 
-    interface OnObjectSelectedListener<T> {
+    public interface OnObjectSelectedListener<T> {
         T convertObject(Object object);
     }
 

@@ -105,8 +105,13 @@ public abstract class TokenCompleteTextView<T> extends MultiAutoCompleteTextView
     private boolean savingState = false;
     private boolean shouldFocusNext = false;
     private boolean allowCollapse = true;
+    private OnObjectSelectedListener<T> mObjectSelectedListener = null;
 
     private int tokenLimit = -1;
+
+    public void setOnObjectSelectedListener(OnObjectSelectedListener<T> listener){
+        mObjectSelectedListener = listener;
+    }
 
     /**
      * Add the TextChangedListeners
@@ -874,7 +879,11 @@ public abstract class TokenCompleteTextView<T> extends MultiAutoCompleteTextView
     @SuppressWarnings("unchecked cast")
     @Override
     protected CharSequence convertSelectionToString(Object object) {
-        selectedObject = (T) object;
+        if(mObjectSelectedListener == null){
+            selectedObject = (T) object;
+        }else{
+            selectedObject = mObjectSelectedListener.convertObject(object);
+        }
 
         //if the token gets deleted, this text will get put in the field instead
         switch (deletionStyle) {
@@ -889,6 +898,10 @@ public abstract class TokenCompleteTextView<T> extends MultiAutoCompleteTextView
                 return super.convertSelectionToString(object);
 
         }
+    }
+
+    interface OnObjectSelectedListener<T> {
+        T convertObject(Object object);
     }
 
     private SpannableStringBuilder buildSpannableForText(CharSequence text) {

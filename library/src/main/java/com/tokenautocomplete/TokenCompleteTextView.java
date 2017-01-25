@@ -221,7 +221,7 @@ public abstract class TokenCompleteTextView<T> extends MultiAutoCompleteTextView
     }
 
     @Override
-    protected void performFiltering(@NonNull CharSequence text, int start, int end,
+    protected void performFiltering(CharSequence text, int start, int end,
                                     int keyCode) {
         if (start < prefix.length()) {
             start = prefix.length();
@@ -604,7 +604,7 @@ public abstract class TokenCompleteTextView<T> extends MultiAutoCompleteTextView
     }
 
     @Override
-    public InputConnection onCreateInputConnection(@NonNull EditorInfo outAttrs) {
+    public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
         InputConnection superConn = super.onCreateInputConnection(outAttrs);
         if (superConn != null) {
             TokenInputConnection conn = new TokenInputConnection(superConn, true);
@@ -631,7 +631,7 @@ public abstract class TokenCompleteTextView<T> extends MultiAutoCompleteTextView
     }
 
     @Override
-    public boolean onKeyUp(int keyCode, @NonNull KeyEvent event) {
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
         boolean handled = super.onKeyUp(keyCode, event);
         if (shouldFocusNext) {
             shouldFocusNext = false;
@@ -641,7 +641,7 @@ public abstract class TokenCompleteTextView<T> extends MultiAutoCompleteTextView
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, @NonNull KeyEvent event) {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         boolean handled = false;
         switch (keyCode) {
             case KeyEvent.KEYCODE_TAB:
@@ -687,7 +687,7 @@ public abstract class TokenCompleteTextView<T> extends MultiAutoCompleteTextView
     }
 
     @Override
-    public boolean onTouchEvent(@NonNull MotionEvent event) {
+    public boolean onTouchEvent(MotionEvent event) {
         int action = event.getActionMasked();
         Editable text = getText();
         boolean handled = false;
@@ -957,7 +957,7 @@ public abstract class TokenCompleteTextView<T> extends MultiAutoCompleteTextView
     }
 
     @Override
-    public boolean extractText(@NonNull ExtractedTextRequest request, @NonNull ExtractedText outText) {
+    public boolean extractText(ExtractedTextRequest request, ExtractedText outText) {
         try {
             return super.extractText(request, outText);
         } catch (IndexOutOfBoundsException ignored) {
@@ -1516,7 +1516,7 @@ public abstract class TokenCompleteTextView<T> extends MultiAutoCompleteTextView
         }
 
         @Override
-        public void writeToParcel(@NonNull Parcel out, int flags) {
+        public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
             TextUtils.writeToParcel(prefix, out, 0);
             out.writeInt(allowCollapse ? 1 : 0);
